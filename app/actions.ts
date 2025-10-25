@@ -72,6 +72,7 @@ export async function createTrelloCard(data: FormData) {
       idList: listId,
       name: cardTitle,
       desc: description.trim(),
+      urlSource: "https://estimate-pearl.vercel.app/",
     }),
   )
 
@@ -84,6 +85,7 @@ export async function createTrelloCard(data: FormData) {
       idList: listId,
       name: cardTitle,
       desc: description.trim(),
+      urlSource: "https://estimate-pearl.vercel.app/",
     }),
   })
 
