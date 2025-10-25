@@ -20,7 +20,10 @@ const CATEGORIES = ["洗車機エラー系", "洗車機傷系", "お客様トラ
 const ERROR_MESSAGES = ["オーバーロード", "アブノーマル", "エラー文言無し", "その他"]
 
 const ERROR_DAMAGED_PARTS = [
+  "ハイプレッシャー",
+  "リアプレッシャー",
   "ホイールブラシ",
+  "ホイールブラシチェーン",
   "ショートスカートブラシ",
   "トップブラシ",
   "ミドルブラシ",
@@ -29,6 +32,7 @@ const ERROR_DAMAGED_PARTS = [
   "昇降ブロワー",
   "ブロワー",
   "コンベアー",
+  "シリンダー",
   "その他",
 ]
 
@@ -56,7 +60,7 @@ export function ReportForm({ initialData, onSubmit }: ReportFormProps) {
       const hasErrorMessage =
         formData.errorMessage && (formData.errorMessage !== "その他" || formData.errorMessageDetail)
       const hasDamagedPart = formData.damagedPart && (formData.damagedPart !== "その他" || formData.damagedPartDetail)
-      return !!(hasErrorMessage && hasDamagedPart && formData.wiringError)
+      return !!(hasErrorMessage && hasDamagedPart)
     }
 
     if (formData.category === "洗車機傷系") {
@@ -293,8 +297,7 @@ export function ReportForm({ initialData, onSubmit }: ReportFormProps) {
 
                 <div className="space-y-3">
                   <Label htmlFor="wiringError" className="text-base font-semibold">
-                    配線のエラー文言 <span className="text-muted-foreground text-sm font-normal">例) X〇〇</span>{" "}
-                    <span className="text-destructive">*</span>
+                    配線のエラー文言 <span className="text-muted-foreground text-sm font-normal">例) X〇〇</span>
                   </Label>
                   <Input
                     id="wiringError"
