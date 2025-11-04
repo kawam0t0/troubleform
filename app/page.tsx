@@ -10,6 +10,7 @@ export type FormData = {
   storeName: string
   staffName: string
   category: "洗車機エラー系" | "洗車機傷系" | "お客様トラブル系" | "その他" | ""
+  status?: "解決済み" | "未解決"
   // 洗車機エラー系
   errorMessage?: string
   errorMessageDetail?: string
@@ -41,6 +42,7 @@ export default function Home() {
     storeName: "",
     staffName: "",
     category: "",
+    status: "未解決", // Default status set to "未解決"
   })
 
   const handleFormSubmit = (data: FormData) => {
@@ -62,6 +64,7 @@ export default function Home() {
       storeName: "",
       staffName: "",
       category: "",
+      status: "未解決", // Default status set to "未解決"
     })
     setStep("form")
   }

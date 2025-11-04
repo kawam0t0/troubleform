@@ -53,7 +53,7 @@ export function ReportForm({ initialData, onSubmit }: ReportFormProps) {
   }
 
   const isFormValid = () => {
-    if (!formData.date || !formData.storeName || !formData.staffName || !formData.category) {
+    if (!formData.date || !formData.storeName || !formData.staffName || !formData.category || !formData.status) {
       return false
     }
 
@@ -165,6 +165,7 @@ export function ReportForm({ initialData, onSubmit }: ReportFormProps) {
                     details: undefined,
                     freeText: undefined,
                     side: undefined,
+                    status: undefined,
                   })
                 }
               >
@@ -323,6 +324,31 @@ export function ReportForm({ initialData, onSubmit }: ReportFormProps) {
                     className="min-h-32 text-base resize-none"
                   />
                 </div>
+
+                {/* 解決済み */}
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold">
+                    解決済み <span className="text-destructive">*</span>
+                  </Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      type="button"
+                      variant={formData.status === "解決済み" ? "default" : "outline"}
+                      className="h-14 text-base font-semibold"
+                      onClick={() => setFormData({ ...formData, status: "解決済み" })}
+                    >
+                      解決済み
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={formData.status === "未解決" ? "default" : "outline"}
+                      className="h-14 text-base font-semibold"
+                      onClick={() => setFormData({ ...formData, status: "未解決" })}
+                    >
+                      未解決
+                    </Button>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -425,6 +451,31 @@ export function ReportForm({ initialData, onSubmit }: ReportFormProps) {
                     className="min-h-32 text-base resize-none"
                   />
                 </div>
+
+                {/* 解決済み */}
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold">
+                    解決済み <span className="text-destructive">*</span>
+                  </Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      type="button"
+                      variant={formData.status === "解決済み" ? "default" : "outline"}
+                      className="h-14 text-base font-semibold"
+                      onClick={() => setFormData({ ...formData, status: "解決済み" })}
+                    >
+                      解決済み
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={formData.status === "未解決" ? "default" : "outline"}
+                      className="h-14 text-base font-semibold"
+                      onClick={() => setFormData({ ...formData, status: "未解決" })}
+                    >
+                      未解決
+                    </Button>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -458,6 +509,31 @@ export function ReportForm({ initialData, onSubmit }: ReportFormProps) {
                     onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
                     className="min-h-32 text-base resize-none"
                   />
+                </div>
+
+                {/* 解決済み */}
+                <div className="space-y-3">
+                  <Label className="text-base font-semibold">
+                    解決済み <span className="text-destructive">*</span>
+                  </Label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      type="button"
+                      variant={formData.status === "解決済み" ? "default" : "outline"}
+                      className="h-14 text-base font-semibold"
+                      onClick={() => setFormData({ ...formData, status: "解決済み" })}
+                    >
+                      解決済み
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={formData.status === "未解決" ? "default" : "outline"}
+                      className="h-14 text-base font-semibold"
+                      onClick={() => setFormData({ ...formData, status: "未解決" })}
+                    >
+                      未解決
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}

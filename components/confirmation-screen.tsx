@@ -108,6 +108,11 @@ export function ConfirmationScreen({ data, onConfirm, onEdit }: ConfirmationScre
                   </p>
                 </div>
               )}
+
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-muted-foreground">解決済み</h3>
+                <p className="text-base leading-relaxed bg-muted p-4 rounded-lg">{data.status}</p>
+              </div>
             </>
           )}
 
@@ -140,6 +145,11 @@ export function ConfirmationScreen({ data, onConfirm, onEdit }: ConfirmationScre
                   </p>
                 </div>
               )}
+
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-muted-foreground">解決済み</h3>
+                <p className="text-base leading-relaxed bg-muted p-4 rounded-lg">{data.status}</p>
+              </div>
             </>
           )}
 
@@ -158,6 +168,11 @@ export function ConfirmationScreen({ data, onConfirm, onEdit }: ConfirmationScre
                   </p>
                 </div>
               )}
+
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-muted-foreground">解決済み</h3>
+                <p className="text-base leading-relaxed bg-muted p-4 rounded-lg">{data.status}</p>
+              </div>
             </>
           )}
         </CardContent>

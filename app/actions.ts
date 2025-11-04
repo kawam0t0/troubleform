@@ -6,6 +6,7 @@ export async function createTrelloCard(data: FormData) {
   const apiKey = process.env.TRELLO_API_KEY?.trim()
   const token = process.env.TRELLO_TOKEN?.trim()
   const listId = process.env.TRELLO_LIST_ID?.trim()
+  const resolvedLabelId = process.env.TRELLO_RESOLVED_LABEL_ID?.trim()
 
   console.log("[v0] Environment variables check:")
   console.log("[v0] API Key exists:", !!apiKey)
@@ -15,6 +16,7 @@ export async function createTrelloCard(data: FormData) {
   console.log("[v0] Token length:", token?.length)
   console.log("[v0] Token starts with:", token?.substring(0, 8))
   console.log("[v0] List ID:", listId)
+  console.log("[v0] Resolved Label ID:", resolvedLabelId)
 
   if (!apiKey || !token || !listId) {
     throw new Error("Trello API credentials are not configured")
@@ -50,6 +52,7 @@ export async function createTrelloCard(data: FormData) {
     if (data.remarks) {
       description += `\n\n## その他備考\n${data.remarks}`
     }
+    description += `\n\n## 解決済み\n${data.status}`
   } else if (data.category === "洗車機傷系") {
     const damageType =
       data.damageType === "その他" && data.damageTypeDetail ? `その他: ${data.damageTypeDetail}` : data.damageType
@@ -57,36 +60,42 @@ export async function createTrelloCard(data: FormData) {
     if (data.remarks) {
       description += `\n\n## その他備考\n${data.remarks}`
     }
+    description += `\n\n## 解決済み\n${data.status}`
   } else if (data.category === "お客様トラブル系" || data.category === "その他") {
     description += `## 詳細\n${data.freeText}`
     if (data.remarks) {
       description += `\n\n## その他備考\n${data.remarks}`
     }
+    description += `\n\n## 解決済み\n${data.status}`
+  }
+
+  const requestBody: {
+    idList: string
+    name: string
+    desc: string
+    urlSource: string
+    idLabels?: string
+  } = {
+    idList: listId,
+    name: cardTitle,
+    desc: description.trim(),
+    urlSource: "https://estimate-pearl.vercel.app/",
+  }
+
+  if (data.status === "解決済み" && resolvedLabelId) {
+    requestBody.idLabels = resolvedLabelId
   }
 
   const url = `https://api.trello.com/1/cards?key=${apiKey}&token=${token}`
   console.log("[v0] Request URL (key/token masked):", url.replace(apiKey, "***KEY***").replace(token, "***TOKEN***"))
-  console.log(
-    "[v0] Request body:",
-    JSON.stringify({
-      idList: listId,
-      name: cardTitle,
-      desc: description.trim(),
-      urlSource: "https://estimate-pearl.vercel.app/",
-    }),
-  )
+  console.log("[v0] Request body:", JSON.stringify(requestBody))
 
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      idList: listId,
-      name: cardTitle,
-      desc: description.trim(),
-      urlSource: "https://estimate-pearl.vercel.app/",
-    }),
+    body: JSON.stringify(requestBody),
   })
 
   console.log("[v0] Response status:", response.status)
